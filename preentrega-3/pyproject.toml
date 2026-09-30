@@ -1,0 +1,32 @@
+[project]
+name = "semantic-retrieval"
+version = "0.1.0"
+description = "Recuperación semántica local con ChromaDB y embeddings de Gemini (Pre-entrega 3)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb",
+    "numpy",
+    "google-genai",
+    "langchain-text-splitters",
+    "pydantic>=2",
+    "python-dotenv",
+    "tenacity",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "mypy",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]

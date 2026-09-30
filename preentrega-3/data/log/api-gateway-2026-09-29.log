@@ -1,0 +1,8 @@
+2026-09-29 10:02:11 INFO  [api-gateway] deploy de pagos-api revisión 4f1a2c completado
+2026-09-29 10:03:40 ERROR [api-gateway] upstream pagos-api respondió 502 Bad Gateway path=/v1/payments
+2026-09-29 10:03:41 ERROR [api-gateway] upstream pagos-api respondió 502 Bad Gateway path=/v1/payments/88301
+2026-09-29 10:03:55 WARN  [api-gateway] 146 respuestas 502 en el último minuto (umbral 50)
+2026-09-29 10:04:02 ERROR [pagos-api] ImportError: cannot import name 'ComercioSchema' from 'pagos.schemas'
+2026-09-29 10:04:02 ERROR [kubelet] pagos-api-5d8b-1 CrashLoopBackOff
+2026-09-29 10:06:30 INFO  [argocd] rollback de pagos-api a la revisión 9e7d11 iniciado por guardia
+2026-09-29 10:07:48 INFO  [api-gateway] upstream pagos-api sano, tasa de 502 en 0

@@ -5,3 +5,5 @@ __pycache__/
 .pytest_cache/
 explanation-p1.md
 explanation-p2.md
+explanation-p3.md
+chroma_db/

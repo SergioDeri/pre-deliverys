@@ -1,11 +1,12 @@
 # Pre-entrega 1 — Cliente de LLM robusto y asíncrono
 
-Cada pre-entrega es un proyecto independiente, con sus dependencias, tests y README propios. Las dos usan Groq como único proveedor (ver [la ADR](preentrega-1/docs/adr/0001-groq-only-provider.md)).
+Cada pre-entrega es un proyecto independiente, con sus dependencias, tests y README propios. Las dos primeras usan Groq como único proveedor (ver [la ADR](preentrega-1/docs/adr/0001-groq-only-provider.md)); la tercera usa Gemini para los embeddings (ver [su ADR](preentrega-3/docs/adr/0001-gemini-embeddings-outside-chroma.md)).
 
 | Carpeta | Contenido |
 |---|---|
 | [`preentrega-1/`](preentrega-1/README.md) | Cliente LLM asíncrono unificado: respuesta completa y streaming, validación con Pydantic, reintentos con backoff. |
 | [`preentrega-2/`](preentrega-2/README.md) | Pipeline LCEL que convierte logs y descripciones de arquitectura en un análisis técnico validado, con reintentos y autocorrección. |
+| [`preentrega-3/`](preentrega-3/README.md) | Recuperación semántica local: chunking con metadatos, ChromaDB persistente con embeddings de Gemini y búsqueda con filtros. |
 
 ## Puesta en marcha
 
@@ -14,10 +15,10 @@ Requiere Python 3.12 y [uv](https://docs.astral.sh/uv/) (o pip con el `requireme
 ```bash
 git clone <url-del-repo>
 cd pre-deliverys
-cp .env.example .env        # completa GROQ_API_KEY
+cp .env.example .env        # completa GROQ_API_KEY y GEMINI_API_KEY
 ```
 
-El `.env` de la raíz sirve para las dos pre-entregas. Después, dentro de cada carpeta:
+El `.env` de la raíz sirve para todas las pre-entregas. Después, dentro de cada carpeta:
 
 ```bash
 cd preentrega-2
