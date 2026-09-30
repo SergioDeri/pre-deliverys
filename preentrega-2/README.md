@@ -1,32 +1,4 @@
-# Pre-entrega 1 — Cliente de LLM robusto y asíncrono
-
-Cada pre-entrega es un proyecto independiente, con sus dependencias, tests y README propios. Las dos usan Groq como único proveedor (ver [la ADR](preentrega-1/docs/adr/0001-groq-only-provider.md)).
-
-| Carpeta | Contenido |
-|---|---|
-| [`preentrega-1/`](preentrega-1/README.md) | Cliente LLM asíncrono unificado: respuesta completa y streaming, validación con Pydantic, reintentos con backoff. |
-| [`preentrega-2/`](preentrega-2/README.md) | Pipeline LCEL que convierte logs y descripciones de arquitectura en un análisis técnico validado, con reintentos y autocorrección. |
-
-## Puesta en marcha
-
-Requiere Python 3.12 y [uv](https://docs.astral.sh/uv/) (o pip con el `requirements.txt` de cada carpeta).
-
-```bash
-git clone <url-del-repo>
-cd pre-deliverys
-cp .env.example .env        # completa GROQ_API_KEY
-```
-
-El `.env` de la raíz sirve para las dos pre-entregas. Después, dentro de cada carpeta:
-
-```bash
-cd preentrega-2
-uv sync
-uv run python main.py
-uv run pytest
-```
-
-# Pre-entrega 2 - Pipeline de extracción validada
+# Pipeline de extracción validada — Pre-entrega 2
 
 Pipeline en Python 3.12 que recibe texto técnico sin estructura (un log de error o una descripción de arquitectura) y lo convierte en un objeto Pydantic validado, usando LangChain Expression Language (LCEL) sobre Groq, con reintentos automáticos y fallos controlados.
 

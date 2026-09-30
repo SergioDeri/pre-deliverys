@@ -6,7 +6,7 @@ from .groq_client import GroqClient
 from .schemas import GenerationConfig, Provider, RetryPolicy
 
 DEFAULT_MODELS: dict[Provider, str] = {
-    Provider.GROQ: "llama-3.1-8b-instant",
+    Provider.GROQ: "openai/gpt-oss-20b",
 }
 
 _Builder = Callable[[GenerationConfig, str | None, RetryPolicy | None], BaseLLMClient]

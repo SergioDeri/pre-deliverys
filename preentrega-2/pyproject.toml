@@ -1,0 +1,31 @@
+[project]
+name = "extraction-pipeline"
+version = "0.1.0"
+description = "Pipeline LCEL de extracción validada con Pydantic (Pre-entrega 2)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-core",
+    "langchain-groq",
+    "pydantic>=2",
+    "python-dotenv",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "mypy",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
