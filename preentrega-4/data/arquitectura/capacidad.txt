@@ -1,0 +1,9 @@
+Notas de capacidad - revisión de septiembre de 2026
+
+pagos-api corre con 6 réplicas de 1 vCPU. Con 400 TPS el uso de CPU ronda el 55%, así que hay margen para un pico de 1,5x antes de que el HPA tenga que escalar.
+
+El cuello de botella real es PostgreSQL: las conexiones. Con 6 réplicas de pagos-api y 8 de pagos-worker, a 20 conexiones cada una, se piden hasta 280 conexiones y PgBouncer está configurado con un pool de 200 contra la base. En los picos aparecen esperas por conexión antes que cualquier otro síntoma.
+
+RabbitMQ aguanta sin problema: el lag normal de pagos.autorizar es menor a 50 mensajes. Un lag sostenido de más de 1.000 mensajes casi siempre significa que los workers están bloqueados esperando a la base o al procesador de tarjetas.
+
+Redis usa menos de 2 GB. No es una preocupación de capacidad hoy.

@@ -1,0 +1,12 @@
+2026-09-28 21:14:02 INFO  [pagos-api] POST /v1/payments 202 comercio=4312 latency=38ms
+2026-09-28 21:14:05 WARN  [pagos-api] pool de conexiones al 95% (19/20) en la réplica pagos-api-7c9f-2
+2026-09-28 21:14:09 ERROR [pagos-api] psycopg_pool.PoolTimeout: couldn't get a connection after 5.00 sec
+2026-09-28 21:14:09 ERROR [pagos-api] POST /v1/payments -> 503 Service Unavailable comercio=1180
+2026-09-28 21:14:10 ERROR [pagos-api] psycopg_pool.PoolTimeout: couldn't get a connection after 5.00 sec
+2026-09-28 21:14:11 WARN  [pgbouncer] cl_waiting=87 sv_active=200 pool=payflow
+2026-09-28 21:14:13 ERROR [pagos-worker] no se pudo actualizar la transacción 88213: OperationalError: server closed the connection unexpectedly
+2026-09-28 21:14:13 WARN  [pagos-worker] mensaje 88213 sin ack, RabbitMQ lo va a reentregar
+2026-09-28 21:14:20 ERROR [pagos-api] POST /v1/payments -> 503 Service Unavailable comercio=4312
+2026-09-28 21:14:31 INFO  [postgres] consulta cancelada por pg_cancel_backend pid=51220 duración=312s
+2026-09-28 21:14:35 INFO  [pgbouncer] cl_waiting=0 sv_active=143 pool=payflow
+2026-09-28 21:14:36 INFO  [pagos-api] POST /v1/payments 202 comercio=1180 latency=41ms

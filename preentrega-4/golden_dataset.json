@@ -1,0 +1,77 @@
+[
+  {
+    "pregunta": "¿Qué hago si después de publicar una versión nueva empiezan a fallar los pedidos?",
+    "documentos_esperados": ["runbook/rollback-de-deploy.md"]
+  },
+  {
+    "pregunta": "¿Cómo sabe un comercio que una notificación viene realmente de nosotros?",
+    "documentos_esperados": ["arquitectura/webhooks.md"]
+  },
+  {
+    "pregunta": "¿Cada cuánto hay que cambiar las claves que usamos con el procesador de tarjetas?",
+    "documentos_esperados": ["runbook/rotacion-de-credenciales.md"]
+  },
+  {
+    "pregunta": "¿Hay margen de CPU para aguantar más tráfico en el servicio que recibe las órdenes?",
+    "documentos_esperados": ["arquitectura/capacidad.txt"]
+  },
+  {
+    "pregunta": "¿Por qué las liquidaciones no se emparejan por importe?",
+    "documentos_esperados": ["arquitectura/conciliacion.md"]
+  },
+  {
+    "pregunta": "PF-4012",
+    "documentos_esperados": ["errores/catalogo.json"]
+  },
+  {
+    "pregunta": "¿Qué significa el error PF-7002?",
+    "documentos_esperados": [
+      "errores/catalogo.json",
+      "arquitectura/conciliacion.md",
+      "runbook/conciliacion-con-diferencias.md"
+    ]
+  },
+  {
+    "pregunta": "procesador_timeout_corto",
+    "documentos_esperados": ["runbook/cola-de-pagos-caida.md", "log/pagos-worker-2026-09-27.log"]
+  },
+  {
+    "pregunta": "ImportError ComercioSchema",
+    "documentos_esperados": ["log/api-gateway-2026-09-29.log"]
+  },
+  {
+    "pregunta": "¿Dónde se configura gateway-limites?",
+    "documentos_esperados": ["runbook/rate-limit-de-comercio.md"]
+  },
+  {
+    "pregunta": "¿Cuándo se usó pg_cancel_backend?",
+    "documentos_esperados": ["runbook/base-de-datos-no-responde.md", "log/pagos-api-2026-09-28.log"]
+  },
+  {
+    "pregunta": "¿Qué pasó el 28 de septiembre con los 503 de pagos-api y cómo se mitiga?",
+    "documentos_esperados": ["log/pagos-api-2026-09-28.log", "runbook/base-de-datos-no-responde.md"]
+  },
+  {
+    "pregunta": "¿Cómo se evita cobrar dos veces una orden que el comercio manda repetida?",
+    "documentos_esperados": ["arquitectura/flujo-de-un-pago.md", "arquitectura/vision-general.md"]
+  },
+  {
+    "pregunta": "Un comercio no recibe webhooks y su endpoint responde 401, ¿por qué y qué hacemos?",
+    "documentos_esperados": ["runbook/webhooks-no-llegan.md", "arquitectura/webhooks.md"]
+  },
+  {
+    "pregunta": "¿Por qué la conciliación del 25 de septiembre terminó con 36 diferencias?",
+    "documentos_esperados": [
+      "log/conciliacion-2026-09-26.log",
+      "runbook/conciliacion-con-diferencias.md"
+    ]
+  },
+  {
+    "pregunta": "¿Por dónde manda Cobralia el archivo de liquidación?",
+    "documentos_esperados": ["arquitectura/conciliacion.md"]
+  },
+  {
+    "pregunta": "¿Qué papel cumple Argo CD?",
+    "documentos_esperados": ["arquitectura/vision-general.md", "runbook/rollback-de-deploy.md"]
+  }
+]

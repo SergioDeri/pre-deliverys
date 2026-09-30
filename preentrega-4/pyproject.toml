@@ -1,0 +1,39 @@
+[project]
+name = "hybrid-retrieval"
+version = "0.1.0"
+description = "RAG híbrido en la nube con Pinecone Serverless, BM25 y evaluación de recuperación (Pre-entrega 4)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai",
+    "langchain",
+    "langchain-classic",
+    "langchain-community",
+    "langchain-core",
+    "langchain-pinecone",
+    "langchain-text-splitters",
+    "pinecone",
+    "pydantic>=2",
+    "python-dotenv",
+    "rank-bm25",
+    "tenacity",
+    "tiktoken",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "mypy",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = ["ignore:`langchain-community` is being sunset:DeprecationWarning"]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
