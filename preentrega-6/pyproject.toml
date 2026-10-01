@@ -1,0 +1,33 @@
+[project]
+name = "multi-agent-orchestrator"
+version = "0.1.0"
+description = "Orquestador multi-agente con Supervisor y dos especialistas en LangGraph (Pre-entrega 6)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "groq",
+    "langchain-core",
+    "langchain-groq",
+    "langgraph",
+    "pydantic>=2",
+    "python-dotenv",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "mypy",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]

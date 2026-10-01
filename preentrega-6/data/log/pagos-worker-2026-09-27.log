@@ -1,0 +1,9 @@
+2026-09-27 19:40:02 INFO  [pagos-worker] transacción 87102 aprobada por Cobralia en 612ms
+2026-09-27 19:41:15 WARN  [pagos-worker] Cobralia tardó 6.8s en responder la transacción 87140
+2026-09-27 19:41:31 ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87151 vuelve a la cola
+2026-09-27 19:41:33 ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87153 vuelve a la cola
+2026-09-27 19:41:50 WARN  [rabbitmq] lag de pagos.autorizar en 1.420 mensajes
+2026-09-27 19:42:05 INFO  [pagos-worker] feature flag procesador_timeout_corto activado por guardia
+2026-09-27 19:42:40 WARN  [pagos-worker] transacción 87151 rechazada por modo degradado, el comercio puede reintentar
+2026-09-27 19:55:12 INFO  [pagos-worker] Cobralia responde en 540ms, lag de pagos.autorizar en 30 mensajes
+2026-09-27 19:56:00 INFO  [pagos-worker] feature flag procesador_timeout_corto desactivado

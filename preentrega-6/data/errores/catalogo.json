@@ -1,0 +1,65 @@
+[
+  {
+    "codigo": "PF-4001",
+    "titulo": "Firma HMAC inválida",
+    "http": 401,
+    "causa": "El api-gateway no pudo validar la firma HMAC del request con la clave del comercio. Suele ser una clave rotada que el comercio no actualizó o un cuerpo modificado por un proxy.",
+    "runbook": null
+  },
+  {
+    "codigo": "PF-4090",
+    "titulo": "Clave de idempotencia reutilizada con otro cuerpo",
+    "http": 409,
+    "causa": "El comercio mandó una clave de idempotencia que ya existe en Redis pero con un cuerpo distinto al original. PayFlow no crea una segunda transacción.",
+    "runbook": null
+  },
+  {
+    "codigo": "PF-4012",
+    "titulo": "Comercio suspendido",
+    "http": 403,
+    "causa": "El comercio está suspendido por riesgo o por falta de documentación. pagos-api rechaza la orden antes de escribir la transacción.",
+    "runbook": null
+  },
+  {
+    "codigo": "PF-4290",
+    "titulo": "Límite de requests del comercio superado",
+    "http": 429,
+    "causa": "El api-gateway aplicó el rate limiting por comercio (50 requests por segundo, ráfaga de 100).",
+    "runbook": "runbook/rate-limit-de-comercio.md"
+  },
+  {
+    "codigo": "PF-5030",
+    "titulo": "Sin conexiones disponibles a la base",
+    "http": 503,
+    "causa": "pagos-api no consiguió una conexión del pool en 5 segundos (PoolTimeout). Casi siempre es saturación de PgBouncer, no una caída de PostgreSQL.",
+    "runbook": "runbook/base-de-datos-no-responde.md"
+  },
+  {
+    "codigo": "PF-5021",
+    "titulo": "Timeout del procesador de tarjetas",
+    "http": null,
+    "causa": "Cobralia no respondió en 8 segundos. La transacción vuelve a pagos.autorizar con backoff; muchos seguidos hacen crecer el lag de la cola.",
+    "runbook": "runbook/cola-de-pagos-caida.md"
+  },
+  {
+    "codigo": "PF-5022",
+    "titulo": "Credencial del procesador rechazada",
+    "http": null,
+    "causa": "Cobralia rechazó la credencial de pagos-worker. Pasa si se borró la credencial anterior antes de que terminara el reinicio de los workers.",
+    "runbook": "runbook/rotacion-de-credenciales.md"
+  },
+  {
+    "codigo": "PF-6001",
+    "titulo": "Webhook rechazado por el comercio",
+    "http": null,
+    "causa": "El endpoint del comercio respondió algo distinto de 2xx o tardó más de 5 segundos. notificaciones reintenta durante 24 horas.",
+    "runbook": "runbook/webhooks-no-llegan.md"
+  },
+  {
+    "codigo": "PF-7002",
+    "titulo": "Archivo de liquidación ausente",
+    "http": null,
+    "causa": "A las 06:00 el archivo de liquidación de Cobralia todavía no estaba en el SFTP y el job de conciliación se dio por vencido.",
+    "runbook": "runbook/conciliacion-con-diferencias.md"
+  }
+]

@@ -8,6 +8,7 @@ explanation-p2.md
 explanation-p3.md
 explanation-p4.md
 explanation-p5.md
+explanation-p6.md
 chroma_db/
 checkpoints.sqlite*
 trace-*.json
