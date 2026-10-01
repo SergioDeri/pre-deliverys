@@ -1,0 +1,41 @@
+[project]
+name = "incident-orchestrator-api"
+version = "0.1.0"
+description = "API de producción con FastAPI, Redis, aprobación humana y Phoenix para el orquestador de la P6 (Pre-entrega 7)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arize-phoenix-otel",
+    "fastapi",
+    "groq",
+    "httpx",
+    "langchain-core",
+    "langchain-groq",
+    "langgraph",
+    "langgraph-checkpoint-redis",
+    "openinference-instrumentation-langchain",
+    "pydantic>=2",
+    "python-dotenv",
+    "redis",
+    "uvicorn",
+]
+
+[dependency-groups]
+dev = [
+    "fakeredis",
+    "mypy",
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]

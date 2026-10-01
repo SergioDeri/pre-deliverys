@@ -1,0 +1,75 @@
+{
+  "summary": {
+    "jobs": 5,
+    "done": 5,
+    "failed": 0,
+    "p95_accepted_ms": 31.425674800993875,
+    "p95_run_seconds": 361.5304468664006,
+    "p95_end_to_end_s": 364.602366075397,
+    "mean_cost_usd": 0.00127149,
+    "total_cost_usd": 0.00635745,
+    "total_tokens": 60334
+  },
+  "jobs": [
+    {
+      "id": "88f43f09b0034e168832c8ff3dbaa888",
+      "question": "¿Qué pasó el 26/09/2026 en la conciliación y cuántas transacciones quedaron con diferencias?",
+      "status": "DONE",
+      "accepted_ms": 33.59545800049091,
+      "end_to_end_s": 248.9922554579971,
+      "run_seconds": 246.41470966699853,
+      "input_tokens": 7143,
+      "output_tokens": 1327,
+      "cost_usd": 0.000933825,
+      "error": null
+    },
+    {
+      "id": "1c369501caf14faea065be762c10769d",
+      "question": "¿Qué pasó el 27/09/2026 a las 19:41 con Cobralia y cuántos errores hubo por servicio?",
+      "status": "DONE",
+      "accepted_ms": 22.746542003005743,
+      "end_to_end_s": 277.1008369580013,
+      "run_seconds": 274.28819283399935,
+      "input_tokens": 15476,
+      "output_tokens": 1909,
+      "cost_usd": 0.0017334000000000002,
+      "error": null
+    },
+    {
+      "id": "a3ceacdc73b14b17ab3d842d78a4d07c",
+      "question": "¿Cuántos errores hubo por servicio el 28/09/2026 entre las 21:14 y las 21:15?",
+      "status": "DONE",
+      "accepted_ms": 22.05554200190818,
+      "end_to_end_s": 369.41905991699605,
+      "run_seconds": 366.39443920800113,
+      "input_tokens": 13735,
+      "output_tokens": 1921,
+      "cost_usd": 0.0016064249999999999,
+      "error": null
+    },
+    {
+      "id": "e444af322b404e24b5f4f7dc91718df2",
+      "question": "¿Qué causó los 502 del 29/09/2026 a las 10:03 y cuántos errores hubo por servicio?",
+      "status": "DONE",
+      "accepted_ms": 12.310541998886038,
+      "end_to_end_s": 345.3355907090008,
+      "run_seconds": 342.07447749999847,
+      "input_tokens": 8317,
+      "output_tokens": 1452,
+      "cost_usd": 0.001059375,
+      "error": null
+    },
+    {
+      "id": "d006bff835264e39b9503b6706b9019d",
+      "question": "¿Cuánto duró el incidente del 28/09/2026 a las 21:14 y qué servicio falló primero?",
+      "status": "DONE",
+      "accepted_ms": 22.647666999546345,
+      "end_to_end_s": 315.2313601669957,
+      "run_seconds": 312.8303710839973,
+      "input_tokens": 7519,
+      "output_tokens": 1535,
+      "cost_usd": 0.001024425,
+      "error": null
+    }
+  ]
+}

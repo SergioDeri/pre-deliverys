@@ -1,0 +1,7 @@
+2026-09-26 03:00:01 INFO  [conciliacion] inicio para la fecha 2026-09-25
+2026-09-26 03:00:02 WARN  [conciliacion] /liquidaciones/20260925.csv no existe, reintento en 15 minutos
+2026-09-26 03:15:02 WARN  [conciliacion] /liquidaciones/20260925.csv no existe, reintento en 15 minutos
+2026-09-26 03:30:04 INFO  [conciliacion] archivo de Cobralia encontrado, 48.211 líneas
+2026-09-26 03:41:37 INFO  [conciliacion] 48.175 transacciones conciliadas
+2026-09-26 03:41:37 WARN  [conciliacion] 36 transacciones con_diferencia: 31 faltan en el archivo, 5 con diferencia de monto
+2026-09-26 03:41:38 INFO  [conciliacion] resumen publicado en #pagos-conciliacion
