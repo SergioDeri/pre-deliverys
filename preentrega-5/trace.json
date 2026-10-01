@@ -1,0 +1,120 @@
+[
+  {
+    "thread_id": "guardia-7e1f0e47",
+    "question": "¿Qué significa el error PF-5021 y qué tengo que hacer?",
+    "steps": [
+      {
+        "node": "llm",
+        "reasoning": "We need to fetch error code PF-5021 using buscar_codigo_error. Then provide title, HTTP status, cause, and runbook name. Then read the runbook for mitigation steps. Use functions.",
+        "tool_calls": [
+          {
+            "name": "buscar_codigo_error",
+            "args": {
+              "codigo": "PF-5021"
+            }
+          }
+        ]
+      },
+      {
+        "node": "tools",
+        "tool_results": [
+          {
+            "name": "buscar_codigo_error",
+            "content": "PF-5021: Timeout del procesador de tarjetas\nHTTP: no aplica\nCausa: Cobralia no respondió en 8 segundos. La transacción vuelve a pagos.autorizar con backoff; muchos seguidos hacen crecer el lag de la cola.\nRunbook: cola-de-pagos-caida"
+          }
+        ]
+      },
+      {
+        "node": "llm",
+        "reasoning": "We have the error info: title, HTTP, cause, runbook name. Need to respond in Spanish, brief, citing info. Should also maybe read runbook for steps. Let's fetch runbook.",
+        "tool_calls": [
+          {
+            "name": "leer_runbook",
+            "args": {
+              "nombre": "cola-de-pagos-caida"
+            }
+          }
+        ]
+      },
+      {
+        "node": "tools",
+        "tool_results": [
+          {
+            "name": "leer_runbook",
+            "content": "# Runbook: la cola de pagos no avanza\n\n## Síntomas\n\nEl lag de `pagos.autorizar` supera los 1.000 mensajes y sigue subiendo. Los comercios ven transacciones que quedan en `pendiente` durante minutos.\n\n## Diagnóstico\n\n1. Ver en la consola de RabbitMQ si la cola tiene consumidores conectados. Cero consumidores significa que los workers están caídos o no pueden conectarse al broker.\n2. Si hay consumidores pero el `ack rate` es cercano a cero, los workers están bloqueados esperando algo: casi siempre la base de datos o el procesador de tarjetas.\n3. Revisar los logs de `pagos-worker` buscando timeouts.\n\n## Mitigación\n\n- Workers caídos: `kubectl rollout restart deployment/pagos-worker`.\n- Workers bloqueados por la base: seguir el runbook de base de datos, no escalar workers (más workers piden más conexiones).\n- Procesador de tarjetas lento: activar el modo degradado desde el feature flag `procesador_timeout_corto`.\n"
+          }
+        ]
+      },
+      {
+        "node": "llm",
+        "reasoning": "We need to answer: meaning of error PF-5021 and what to do. Use info from catalog and runbook. Provide brief answer in Spanish. Should cite info. Not show tools. Provide concise.",
+        "content": "**PF‑5021 – Timeout del procesador de tarjetas**  \n- **Estado HTTP:** no aplica.  \n- **Causa:** Cobralia no responde en 8 s; la transacción se reintenta con back‑off y, al hacerlo repetidamente, el lag de la cola `pagos.autorizar` crece.\n\n**Qué hacer (runbook “cola‑de‑pagos‑caida”)**  \n\n1. **Verificar la cola**: en la consola de RabbitMQ comprueba si la cola tiene consumidores.  \n2. **Si no hay consumidores** → los workers están caídos; reinícialos:  \n   ```bash\n   kubectl rollout restart deployment/pagos-worker\n   ```  \n3. **Si hay consumidores pero el ack‑rate es casi 0** → los workers están bloqueados, normalmente por la base de datos o por el procesador de tarjetas.  \n4. **Procesador de tarjetas lento** → habilita el modo degradado mediante el feature flag `procesador_timeout_corto`.  \n\nCon estos pasos deberías reducir el lag y que las transacciones vuelvan a procesarse normalmente."
+      }
+    ],
+    "answer": "**PF‑5021 – Timeout del procesador de tarjetas**  \n- **Estado HTTP:** no aplica.  \n- **Causa:** Cobralia no responde en 8 s; la transacción se reintenta con back‑off y, al hacerlo repetidamente, el lag de la cola `pagos.autorizar` crece.\n\n**Qué hacer (runbook “cola‑de‑pagos‑caida”)**  \n\n1. **Verificar la cola**: en la consola de RabbitMQ comprueba si la cola tiene consumidores.  \n2. **Si no hay consumidores** → los workers están caídos; reinícialos:  \n   ```bash\n   kubectl rollout restart deployment/pagos-worker\n   ```  \n3. **Si hay consumidores pero el ack‑rate es casi 0** → los workers están bloqueados, normalmente por la base de datos o por el procesador de tarjetas.  \n4. **Procesador de tarjetas lento** → habilita el modo degradado mediante el feature flag `procesador_timeout_corto`.  \n\nCon estos pasos deberías reducir el lag y que las transacciones vuelvan a procesarse normalmente."
+  },
+  {
+    "thread_id": "guardia-7e1f0e47",
+    "question": "¿Aparece en los logs? ¿A qué hora fue la primera vez?",
+    "steps": [
+      {
+        "node": "llm",
+        "reasoning": "We need to search logs for PF-5021. Use buscar_en_logs with texto \"PF-5021\". No date given.",
+        "tool_calls": [
+          {
+            "name": "buscar_en_logs",
+            "args": {
+              "texto": "PF-5021"
+            }
+          }
+        ]
+      },
+      {
+        "node": "tools",
+        "tool_results": [
+          {
+            "name": "buscar_en_logs",
+            "content": "2026-09-27 19:41:31 ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87151 vuelve a la cola\n2026-09-27 19:41:33 ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87153 vuelve a la cola"
+          }
+        ]
+      },
+      {
+        "node": "llm",
+        "content": "En los logs de **pagos‑worker** aparece el error **PF‑5021**.  \nLa primera aparición registrada es:\n\n**2026‑09‑27 19:41:31** – `ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87151 vuelve a la cola`."
+      }
+    ],
+    "answer": "En los logs de **pagos‑worker** aparece el error **PF‑5021**.  \nLa primera aparición registrada es:\n\n**2026‑09‑27 19:41:31** – `ERROR [pagos-worker] PF-5021 timeout de 8s esperando a Cobralia, transacción 87151 vuelve a la cola`."
+  },
+  {
+    "thread_id": "guardia-7e1f0e47",
+    "question": "¿Y el PF-9999?",
+    "steps": [
+      {
+        "node": "llm",
+        "reasoning": "User asks about PF-9999. Need to look up error code. Use buscar_codigo_error.",
+        "tool_calls": [
+          {
+            "name": "buscar_codigo_error",
+            "args": {
+              "codigo": "PF-9999"
+            }
+          }
+        ]
+      },
+      {
+        "node": "tools",
+        "tool_results": [
+          {
+            "name": "buscar_codigo_error",
+            "content": "Error: el código PF-9999 no está en el catálogo. Códigos válidos: PF-4001, PF-4090, PF-4012, PF-4290, PF-5030, PF-5021, PF-5022, PF-6001, PF-7002."
+          }
+        ]
+      },
+      {
+        "node": "llm",
+        "content": "El código **PF‑9999** no está registrado en el catálogo de errores de PayFlow. No hay información disponible ni runbook asociado para ese código. Si necesitas ayuda con otro error o con un código que sí exista en el catálogo, avísame."
+      }
+    ],
+    "answer": "El código **PF‑9999** no está registrado en el catálogo de errores de PayFlow. No hay información disponible ni runbook asociado para ese código. Si necesitas ayuda con otro error o con un código que sí exista en el catálogo, avísame."
+  }
+]
